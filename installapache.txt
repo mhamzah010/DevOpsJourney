@@ -1,0 +1,21 @@
+---
+ -  name: Install http on Webservers
+    hosts: webservers
+    vars:
+     - port: 8080
+    become_method: sudo
+    become: yes
+
+    tasks:
+
+     - name: install apache2
+       apt: name=apache2 update_cache=yes state=latest
+     - name: Start apache2 service
+       service:
+        name: apache2
+        state: started
+     - name: Create index.html file
+       copy:
+        dest: /var/www/html/index.html
+        content:
+         Selamat Datang di Web kami
