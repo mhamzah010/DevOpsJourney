@@ -1,0 +1,22 @@
+---
+  - name: Create directory
+    hosts: e2c
+    become: yes
+
+    tasks:
+     - name: Create Directory
+       file:
+         path: /home/ubuntu/Testdir
+         state: directory
+
+     - name: Create file
+       file:
+        path: /home/ubuntu/Testdir/file1.txt
+        state: touch
+
+     - name: Create file with content
+       copy:
+        dest: /home/ubuntu/Testdir/Filetest.txt
+        content: "File ini merupakan file percontohan dengan ansible"
+
+
