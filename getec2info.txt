@@ -1,0 +1,20 @@
+  - name: Get EC2 info
+    hosts: localhost
+
+    tasks:
+
+    - name: Get all info from EC2 Instance
+      amazon.aws.ec2_instance_info:
+       region: ap-southeast-1
+       aws_access_key: 
+       aws_secret_key:
+      register: ec2_instance_info
+
+    - name: Print info
+      debug: var="ec2_instance_info.instances"
+
+    - name: Create file with instance info
+      copy:
+       dest: /home/ubuntu/instanceinfo.txt
+       content:
+         - "{{ ec2_instance_info }}"

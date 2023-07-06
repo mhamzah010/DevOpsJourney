@@ -1,0 +1,32 @@
+---
+ - name: Create EC2 Instance
+   hosts: localhost
+   tasks:
+
+   - name: Ansible for create EC2 Instance
+     amazon.aws.ec2_instance:
+      name: "Webservers"
+      key_name: 
+      region: ap-southeast-1
+      vpc_subnet_id: 
+      instance_type: t2.micro
+      security_group: 
+      network:
+       assign_public_ip: true
+      image_id: ami-0df7a207adb9748c7
+      aws_access_key: 
+      aws_secret_key: 
+
+   - name: Ansible for create EC2 Instance
+     amazon.aws.ec2_instance:
+      name: "Database"
+      key_name: 
+      region: ap-southeast-1
+      vpc_subnet_id: 
+      instance_type: t2.micro
+      security_group: 
+      network:
+       assign_public_ip: true
+      image_id: ami-0df7a207adb9748c7
+      aws_access_key: 
+      aws_secret_key: 
