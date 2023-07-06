@@ -1,0 +1,80 @@
+
+-Copy file dalam satu folder dari satu server ke server lain -
+
+root@ip-10-100-0-237:/home/ubuntu# ansible -i inventory e2c -m ansible.builtin.copy -a "src=/home/ubuntu/new dest=/home/ubuntu/new3"
+10.100.1.36 | CHANGED => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": true,
+    "checksum": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+    "dest": "/home/ubuntu/new3/new/file1.txt",
+    "gid": 0,
+    "group": "root",
+    "md5sum": "d41d8cd98f00b204e9800998ecf8427e",
+    "mode": "0644",
+    "owner": "root",
+    "size": 0,
+    "src": "/home/ubuntu/.ansible/tmp/ansible-tmp-1688615867.9664607-1997-101264099310088/source",
+    "state": "file",
+    "uid": 0
+}
+
+-Delete directory di server client-
+
+root@ip-10-100-0-237:/home/ubuntu# ansible -i inventory e2c -m ansible.builtin.file -a "dest=/home/ubuntu/new3 state=absent"
+10.100.1.36 | CHANGED => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": true,
+    "path": "/home/ubuntu/new3",
+    "state": "absent"
+}
+
+-Create user di server client-
+
+root@ip-10-100-0-237:/home/ubuntu# ansible -i inventory e2c -m ansible.builtin.user -a "name=foo password=p@ssword"
+[WARNING]: The input password appears not to have been hashed. The 'password'
+argument must be encrypted for this module to work properly.
+10.100.1.36 | CHANGED => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": true,
+    "comment": "",
+    "create_home": true,
+    "group": 1001,
+    "home": "/home/foo",
+    "name": "foo",
+    "password": "NOT_LOGGING_PASSWORD",
+    "shell": "/bin/sh",
+    "state": "present",
+    "system": false,
+    "uid": 1001
+}
+
+-Delete user di server client-
+
+root@ip-10-100-0-237:/home/ubuntu# ansible -i inventory e2c -m ansible.builtin.user -a "name=foo state=absent"
+10.100.1.36 | CHANGED => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": true,
+    "force": false,
+    "name": "foo",
+    "remove": false,
+    "state": "absent"
+}
+
+-Check httpd service di server client-
+
+root@ip-10-100-0-237:/home/ubuntu# ansible -i inventory e2c -m ansible.builtin.service -a "name=httpd state=started"
+10.100.1.36 | FAILED! => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "msg": "Could not find the requested service httpd: host"
+}
