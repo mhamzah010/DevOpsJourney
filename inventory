@@ -4,12 +4,12 @@ all:
   mail.example.com: null
  children:
   webservers:
-   hosts: devops.example.com devops2.example.com devops[01:50:1].example.com
+   hosts: 10.100.0.150
   dbserver:
    children:
     Production:
-     hosts: 192.168.20.1 10.20.1.1 10.20.2.2
-    deploymen:
+     hosts: 10.100.0.6
+    deployment:
       children:
        usa:
         hosts: 172.16.15.1 172.16.15.10
